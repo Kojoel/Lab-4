@@ -25,3 +25,15 @@ person.greet.apply(somePerson, args);
 //bind()
 let boundGreet = person.greet.bind(somePerson);
 boundGreet();
+
+
+//Event handlers and this:
+const btn = document.getElementById('btn');
+
+btn.addEventListener('click', handleClick());
+
+function handleClick() {
+    console.log(this.id);
+    console.log(this.textContent);
+}
+handleClick.call(btn);
