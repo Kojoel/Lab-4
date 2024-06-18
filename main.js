@@ -26,14 +26,27 @@ person.greet.apply(somePerson, args);
 let boundGreet = person.greet.bind(somePerson);
 boundGreet();
 
-
+/*
 //Event handlers and this:
 const btn = document.getElementById('btn');
-
-btn.addEventListener('click', handleClick());
 
 function handleClick() {
     console.log(this.id);
     console.log(this.textContent);
 }
 handleClick.call(btn);
+
+btn.addEventListener('click', handleClick);
+*/
+
+
+//Using arrow functions for handleClick()
+const handleClick = (event) => {
+    console.log(event.target.id);
+    console.log(event.target.textContent);
+}
+
+btn.addEventListener('click', handleClick);
+
+
+
