@@ -49,4 +49,24 @@ const handleClick = (event) => {
 btn.addEventListener('click', handleClick);
 
 
+//Private Data with Closure and this:
+function createCounter() {
+
+    return {
+        count: 0,
+
+        increment: function(){
+            this.count += 1;
+            console.log(this.count);
+        },
+        getCount: function(){
+            return this.count;
+        }
+    }
+}
+
+const counter = createCounter();
+counter.increment();
+counter.increment();
+console.log(counter.getCount());
 
