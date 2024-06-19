@@ -43,8 +43,17 @@ btn.addEventListener('click', handleClick);
 
 //Using arrow functions for handleClick()
 const handleClick = () => {
-    console.log(this.id); //undefined
-    console.log(this.textContent); //undefined
+    const errorDiv = document.querySelector('.error-div');
+    const pthisId = document.querySelector('#thisId');
+    const pthisTc = document.querySelector('#thisTextContent');
+    const errorReason = document.querySelector('#errorReason');
+    pthisId.textContent = toString(this.id);
+    pthisTc.textContent = toString(this.textContent);
+    errorReason.textContent = `The output generated for 'this.id' and 'this.textContent' is
+    undefined. This is because the arrow function in javascript does not
+    possess its own this context. The arrow functions inherit 'this' from thier
+    surrounding lexical context when they are defined. `;
+    
 }
 
 btn.addEventListener('click', handleClick);
@@ -79,15 +88,22 @@ console.log(counter.getCount());
 
 /////////////// 4. Reusable Component with Closure and this
 const container = document.querySelector('.container');
-    
+startCountBtn = document.querySelector('#start-count');
+
+
 const Timer = {
     createTimer: function(duration,elementId) {
+        userInput = document.querySelector('#user-input');
+        
+        
+        duration = userInput.value;
         this.timeLeft = duration;
+
+
         const element = document.getElementById(elementId);
 
         const countDown = () => {
             if(this.timeLeft >= 0) {
-                console.log('any')
                 element.textContent = this.timeLeft;
                 this.timeLeft--;
             }
@@ -103,4 +119,8 @@ const Timer = {
     }
 }
 
-Timer.createTimer(10, 'timer');
+startCountBtn.addEventListener('click', ()=> {
+    Timer.createTimer(10, 'timer');
+})
+
+
