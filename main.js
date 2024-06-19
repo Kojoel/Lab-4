@@ -1,3 +1,4 @@
+/////////////// Object Methods and this:
 //Person object
 const person = {
     name: 'Nana',
@@ -27,7 +28,7 @@ let boundGreet = person.greet.bind(somePerson);
 boundGreet();
 
 /*
-//Event handlers and this:
+/////////////// 2. Event handlers and this:
 const btn = document.getElementById('btn');
 
 function handleClick() {
@@ -41,15 +42,20 @@ btn.addEventListener('click', handleClick);
 
 
 //Using arrow functions for handleClick()
-const handleClick = (event) => {
-    console.log(event.target.id);
-    console.log(event.target.textContent);
+const handleClick = () => {
+    console.log(this.id); //undefined
+    console.log(this.textContent); //undefined
 }
 
 btn.addEventListener('click', handleClick);
+/*  The output generated for 'this.id' and 'this.textContent' is
+    undefined. This is because the arrow function in javascript does not
+    possess its own this context. The arrow functions inherit 'this' from thier
+    surrounding lexical context when they are defined. 
+*/
 
 
-//Private Data with Closure and this:
+///////////////// 3. Private Data with Closure and this:
 function createCounter() {
 
     return {
@@ -70,3 +76,31 @@ counter.increment();
 counter.increment();
 console.log(counter.getCount());
 
+
+/////////////// 4. Reusable Component with Closure and this
+const container = document.querySelector('.container');
+    
+const Timer = {
+    createTimer: function(duration,elementId) {
+        this.timeLeft = duration;
+        const element = document.getElementById(elementId);
+
+        const countDown = () => {
+            if(this.timeLeft >= 0) {
+                console.log('any')
+                element.textContent = this.timeLeft;
+                this.timeLeft--;
+            }
+            else{
+                clearInterval(this.timeInterval);
+            }
+        };
+
+        countDown();
+        this.timeInterval = setInterval(countDown, 1000);
+
+        return countDown;
+    }
+}
+
+Timer.createTimer(10, 'timer');

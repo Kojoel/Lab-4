@@ -12,6 +12,7 @@ body{
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -29,4 +30,24 @@ body{
 }
 .container button:active{
     opacity: .8;
+}
+
+#timer{
+    margin: 40px 0 0 0;
+    padding: 20px 0;
+    width: 100px;
+    height: fit-content;
+    background-color:rgb(84, 226, 84);
+    color: black;
+    font-weight: 500;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    border-radius: 12px;
+}
+
+#timer p{
+    font-size: 20px;
 }
